@@ -1,0 +1,76 @@
+/* #region container */
+html, body {
+    margin: 0;
+    font-family: monospace;
+}
+
+body {
+    padding: 10px;
+    background: #17191b;
+}
+
+
+
+
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns for a Wordle-like grid */
+    grid-template-rows: repeat(5, 1fr); /* 5 rows for vertical words */
+    gap: 5px;
+    width: 270px; /* Adjust based on the number of columns */
+    margin: 20px auto;
+}
+
+#grid .cell {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid transparent;
+    background-color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Comic Sans MS';
+    outline: none;
+    user-select: none;
+    caret-color: transparent;
+    background: black;
+    color: white;
+}
+#grid .cell::selection {
+    background: transparent;
+}
+#grid .cell:focus {
+    border-color: yellow;
+}
+#grid .cell:disabled {
+    opacity: 0.5;
+}
+
+.green { background-color: green !important; }
+.yellow { background-color: goldenrod !important; }
+.gray { background-color: #32373b !important; }
+
+
+
+
+#keyboard button {
+    border-radius: 4px;
+    padding: 6px;
+    font-size: 2em;
+    width: 1.5em;
+    height: 2em;
+    margin: 2px;
+    outline: none;
+    border: none;
+    color: white;
+    background: gray;
+}
+
+#keyboard .btn-special { width: 2.25em; }
+#keyboard .btn-special > span { font-size: 0.66em; }
