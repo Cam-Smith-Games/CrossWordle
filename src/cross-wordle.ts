@@ -19,6 +19,7 @@ export class CrossWordle {
 
     // #region keyboard
     simulateKeyPress(input:HTMLInputElement, key:string, keyCode: number) {
+        console.log("simulating key press...", { input, key });
         input.dispatchEvent( new KeyboardEvent("keydown", { key, code: key, keyCode, which: keyCode, bubbles: true }));
     }
 
@@ -150,6 +151,8 @@ export class CrossWordle {
             // SUBMIT
             console.log("SUBMIT");
 
+            for (let cell of cellsWithValue) cell.disabled = true;
+
             const value = cellsWithValue.map(c => c.value).join("");
             console.log("awaiting response...");
             const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${value}`);
@@ -161,8 +164,6 @@ export class CrossWordle {
 
                 if (exists) {
                     console.log("WORD EXISTS");
-
-                    for (let cell of cellsWithValue) cell.disabled = true;
 
                     const win = this.validateWord(cellsWithValue);
 
@@ -192,7 +193,10 @@ export class CrossWordle {
 
           
             // invalid word: clear and reset
-            for (let cell of this.getCellsWithValue()) cell.value = "";
+            for (let cell of cellsWithValue) {
+                cell.disabled = false;
+                cell.value = "";
+            }
 
             setTimeout(() => {
                 this.getCell(this.row, 0)?.focus();
